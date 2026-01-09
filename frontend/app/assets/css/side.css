@@ -1,0 +1,53 @@
+aside{
+    width: 250px;
+    margin: 0;
+}
+
+.nav-form a{
+    color: white;
+}
+
+li{
+    list-style: none;
+}
+
+.nav-home,
+.nav-logout{
+    color: white;
+    font-size: 20px;
+    margin: 20px 0;
+}
+
+.nav-home span,
+.nav-logout span{
+    color: white;
+}
+
+.share-label {
+    color: white;
+    font-size: 20px;
+    margin: 0 0 15px 0;
+}
+
+.nav-share form{
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-share textarea{
+    resize: none;
+    height: 150px;
+    border-radius: 15px;
+    background-color: black;
+    border: 1px white solid;
+}
+
+.share-button{
+    width: 90px;
+    height: 40px;
+    border-radius: 50px;
+    margin-top: 10px;
+    margin-left: auto;
+    background-color: blueviolet;
+    color: white;
+}
