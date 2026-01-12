@@ -1,3 +1,28 @@
-.layout {
+.main {
     display: flex;
+    flex: 1;
+}
+
+.message-title h3{
+    color: white;
+    margin: 10px 40px 20px 40px;
+    font-size: 25px;
+}
+
+.post-header{
+    display: flex;
+    font-size: 18px;
+    font-weight: bold;
+    gap: 20px;
+    color: white;
+    border-top: 1px solid white;
+    padding-top: 15px;
+}
+
+.post-message{
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    border-bottom: 1px solid white;
+    padding-bottom: 15px;
 }

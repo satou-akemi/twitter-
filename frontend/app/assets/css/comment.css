@@ -1,0 +1,87 @@
+main{
+    flex: 1;
+}
+
+.comment-title{
+    color: white;
+    margin: 10px 40px 20px 40px;
+    font-size: 25px;
+}
+
+.comment{
+    color: white;
+    text-align: center;
+    margin: 5px 0;
+    font-size: 15px;
+}
+
+.comment-header{
+    border-top: 1px solid white;
+    border-bottom: 1px solid white;
+}
+
+.comment-name{
+    display: inline-block;
+    color: white;
+    margin: 15px 0 5px 0;
+}
+
+.comment-message{
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+}
+
+.comment-form{
+    margin: 20px 0 20px 40px;
+}
+
+.comment-form form{
+    display: flex;
+    flex-direction: column;
+}
+
+.comment-field{
+    width: 95%;
+    height: 35px;
+    border-radius: 10px;
+    background-color: black;
+    border: 1px solid white;
+    padding: 5px 15px;
+}
+
+.comment-button{
+    width: 100px;
+    height: 45px;
+    border-radius: 40px;
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-left: auto;
+    background-color: blueviolet;
+    color: white;
+}
+
+.layout {
+    display: flex;
+}
+
+.post-header {
+    display: flex;
+    font-size: 18px;
+    font-weight: bold;
+    gap: 20px;
+    color: white;
+    float: 1;
+    border-top: 1px solid white;
+    padding-top: 15px;
+}
+
+.post-message {
+    font-size: 15px;
+    font-weight: bold;
+    color: white;
+    flex: 1;
+    border-bottom: 1px solid white;
+    padding-bottom: 15px;
+}
