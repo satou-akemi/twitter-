@@ -1,17 +1,19 @@
 <template>
     <aside>
         <nav>
-            <NuxtLink to="/">SHARE</NuxtLink>
+            <NuxtLink to="/">
+                <img class="share-logo" src="/assets/logo.png" alt="SHARE">
+            </NuxtLink>
             <ul>
                 <li class="nav-home">
                     <NuxtLink to="/">
-                    <img src="" alt="⌂">
+                    <img class="home-logo" src="/assets/home.png" alt="⌂">
                     <span>ホーム</span>
                     </NuxtLink>
                 </li>
                 <li class="nav-logout">
                     <NuxtLink to="/login">
-                    <img src="" alt="->">
+                    <img class="logout-logo" src="/assets/logout.png" alt="->">
                     <span>ログアウト</span>
                     </NuxtLink>
                 </li>
@@ -29,8 +31,20 @@
 
 <script setup>
     import { ref } from 'vue'
-const textbox = ref('')
-const submit = () => {
-        console.log(textarea.value)
+const textarea = ref('')
+const submit = async() => {
+    const res = await $fetch(
+        'http://localhost/api/posts',
+        {
+            method: 'POST',
+            body: {
+                text:textarea.value
+                }
+            }
+    )
+    console.log(res)
+
+    textarea.value = ''
+    window.location.reload()
     }
 </script>

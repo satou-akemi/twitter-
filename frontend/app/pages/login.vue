@@ -5,12 +5,12 @@
             <form @submit.prevent="submit">
             <h3 class="login-title">ログイン</h3>
                 <div class="form-name">
-                    <input type="email" v-model="email" placeholder="メールアドレス">
-                    <p><!--※ エラー表示予定--></p>
+                    <input type="email" v-model="email.value.value" placeholder="メールアドレス">
+                    <p>{{ email.errors.value[0] }}</p>
                 </div>
                 <div class="form-password">
                     <input type="password" v-model="password" placeholder="パスワード">
-                <p><!--※ エラー表示予定--></p>
+                <p>{{ password.errors.value[0] }}</p>
                 </div>
                 <button class="form-button">ログイン</button>
             </form>
@@ -20,12 +20,35 @@
 
 <script setup>
 import '~/assets/css/login.css'
-import { ref } from 'vue'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../utils/firebase'
 
-const email = ref('')
-const password = ref('')
+import { useForm, useField,defineRule } from 'vee-validate'
+import { required, email as emailRule, min } from '@vee-validate/rules'
 
-const submit = () => {
-    console.log(email.value,password.value)
+defineRule('required', required)
+defineRule('email', emailRule)
+defineRule('min', min)
+
+const { handleSubmit } = useForm()
+
+const email = useField('email','required|email',{label:'メールアドレス'})
+const password = useField('password','required|min:6',{label:'パスワード'})
+
+const submit = async () => {
+    try {
+        const userCredential = await signInWithEmailAndPassword(
+            auth,
+            email.value,
+            password.value
+        )
+        console.log('ログイン成功')
+        console.log(userCredential.user)
+
+        await navigateTo('/')
+
+    } catch (error) {
+        console.error('ログイン失敗', error)
+    }
 }
 </script>

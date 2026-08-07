@@ -8,13 +8,22 @@
         <ul>
             <li v-for="post in posts" :key="post.id">
                 <div class="post-header">
-                    <span class="user-name">{{ post.name }}</span>
-                    <button class="like-button">♥</button>
+                    <span class="user-name">{{ post.user.name }}</span>
+                    <button class="like-button"
+                    @click="toggleLike(post.id)">
+                        <img src="/assets/heart.png" alt="♡" class="heart-logo">
+                    </button>
                     <span class="like-count">{{ post.likes_count }}</span>
-                    <button class="delete-button">×</button>
-                    <NuxtLink to="/comment/">→</NuxtLink>
+                    <button class="delete-button"
+                    @click="deletePost(post.id)">
+                        <img src="/assets/cross.png" alt="×" class="cross-logo">
+                    </button>
+                    <NuxtLink :to="`/comment/${post.id}`">
+                        <img src="/assets/feather.png" alt="->" class="feather-logo">
+                    </NuxtLink>
+                    <span class="comment-count">{{ post.comments_count }}</span>
                 </div>
-                <p class="post-message">{{ post.message }}</p>
+                <p class="post-message">{{ post.text }}</p>
             </li>
         </ul>
     </main>
@@ -22,12 +31,27 @@
 </template>
 
 <script setup>
-const posts = [
-    {
-        id: 1,
-        name: 'dami1',
-        message: '初めての投稿',
-        likes_count:3
-    }
-    ]
+const posts = ref([])
+
+const fetchPosts = async (id) => {
+    posts.value = await $fetch('http://localhost/api/posts')
+}
+
+await fetchPosts()
+
+const toggleLike = async (id) => {
+    const res = await $fetch(`http://localhost/api/posts/${id}/like`, {
+        method:'POST'
+    })
+
+    await fetchPosts()
+}
+
+const deletePost = async (id) => {
+    await $fetch(`http://localhost/api/posts/${id}`, {
+        method: 'DELETE'
+    })
+
+    await fetchPosts()
+}
 </script>

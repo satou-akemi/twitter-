@@ -3,6 +3,24 @@ aside{
     margin-right: 30px;
 }
 
+.share-logo {
+    width: 100px;
+    display: inline-block;
+    margin-left: 30px;
+}
+
+.home-logo {
+    width: 25px;
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.logout-logo {
+    width: 25px;
+    display: inline-block;
+    margin-right: 15px;
+}
+
 .nav-form a{
     color: white;
 }
@@ -41,6 +59,7 @@ li{
     background-color: black;
     border: 1px white solid;
     padding: 5px ;
+    color: white;
 }
 
 .share-button{
@@ -51,4 +70,5 @@ li{
     margin-left: auto;
     background-color: blueviolet;
     color: white;
+    cursor: pointer;
 }

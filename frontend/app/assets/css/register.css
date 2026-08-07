@@ -20,7 +20,7 @@ body{
 
 .form-text{
     padding: 5px;
-    margin-top: 8px;
+    margin-top: 5px;
 }
 
 .register-form input {
@@ -39,4 +39,11 @@ body{
     background-color: blueviolet;
     border-color: blueviolet;
     border-radius: 30px;
+    cursor: pointer;
+}
+
+.errors{
+    margin: 0;
+    color: red;
+    font-weight: bold;
 }
