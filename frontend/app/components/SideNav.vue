@@ -21,6 +21,8 @@
                     <form @submit.prevent="submit">
                         <label class="share-label">シェア</label>
                         <textarea v-model="textarea"></textarea>
+
+                        <p v-if="errors.textarea" class="errors">{{ errors.textarea }}</p>
                         <button class="share-button">シェアする</button>
                     </form>
                 </li>
@@ -30,9 +32,28 @@
 </template>
 
 <script setup>
-    import { ref } from 'vue'
-const textarea = ref('')
-const submit = async() => {
+import { useForm } from 'vee-validate'
+
+const { defineField, handleSubmit, errors } = useForm({
+    validationSchema: {
+        textarea: (value) => {
+            if (!value) {
+                return '投稿内容を入力してください'
+            }
+
+            if (value.length > 120) {
+                return '投稿内容は120文字以内で入力してください'
+            }
+
+            return true
+        }
+    }
+})
+const [textarea] = defineField('textarea')
+
+const submit = handleSubmit(async () => {
+    console.log('バリデーションOK')
+
     const res = await $fetch(
         'http://localhost/api/posts',
         {
@@ -46,5 +67,10 @@ const submit = async() => {
 
     textarea.value = ''
     window.location.reload()
+},
+() => {
+        console.log('バリデーションNG')
     }
+
+)
 </script>

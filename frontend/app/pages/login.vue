@@ -5,12 +5,12 @@
             <form @submit.prevent="submit">
             <h3 class="login-title">ログイン</h3>
                 <div class="form-name">
-                    <input type="email" v-model="email.value.value" placeholder="メールアドレス">
-                    <p>{{ email.errors.value[0] }}</p>
+                    <input type="email" v-model="email" placeholder="メールアドレス">
+                    <p v-if="errors.email" class="errors">{{ errors.email }}</p>
                 </div>
                 <div class="form-password">
                     <input type="password" v-model="password" placeholder="パスワード">
-                <p>{{ password.errors.value[0] }}</p>
+                    <p v-if="errors.password" class="errors">{{errors.password }}</p>
                 </div>
                 <button class="form-button">ログイン</button>
             </form>
@@ -23,32 +23,45 @@ import '~/assets/css/login.css'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../utils/firebase'
 
-import { useForm, useField,defineRule } from 'vee-validate'
-import { required, email as emailRule, min } from '@vee-validate/rules'
+import { useForm } from 'vee-validate'
 
-defineRule('required', required)
-defineRule('email', emailRule)
-defineRule('min', min)
+const { defineField, handleSubmit, errors } = useForm({
+    validationSchema: {
+        email: (value) => {
+        if (value) {
+        return true
+        }
 
-const { handleSubmit } = useForm()
+        return 'メールアドレスを入力してください'
+    },
 
-const email = useField('email','required|email',{label:'メールアドレス'})
-const password = useField('password','required|min:6',{label:'パスワード'})
+    password: (value) => {
+        if (value) {
+        return true
+        }
 
-const submit = async () => {
-    try {
-        const userCredential = await signInWithEmailAndPassword(
-            auth,
-            email.value,
-            password.value
-        )
-        console.log('ログイン成功')
-        console.log(userCredential.user)
-
-        await navigateTo('/')
-
-    } catch (error) {
-        console.error('ログイン失敗', error)
+        return 'パスワードを入力してください'
     }
-}
+    }
+})
+
+const [email] = defineField('email')
+const [password] = defineField('password')
+
+const submit = handleSubmit(async () => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      email.value,
+      password.value
+    )
+
+    console.log('ログイン成功')
+    console.log(userCredential.user)
+
+    await navigateTo('/')
+  } catch (error) {
+    console.error('ログイン失敗', error)
+  }
+})
 </script>

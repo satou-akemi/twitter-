@@ -20,6 +20,17 @@
     border-radius: 13px;
 }
 
+.errors{
+    margin: 0;
+    color: red;
+    font-weight: bold;
+}
+
+.form-name,
+.form-password{
+    margin-top:15px
+}
+
 .form-button{
     width: 25%;
     height: 40px;

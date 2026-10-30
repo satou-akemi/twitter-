@@ -2,7 +2,7 @@
     <nav>
         <ul class="nav-group">
             <li class="nav-share">
-                <NuxtLink  to="/"><img src="/assets/logo.png" alt="" class="header-share-logo"></NuxtLink></li>
+                <img src="/assets/logo.png" alt="" class="header-share-logo"></li>
             <li class="nav-register">
                 <NuxtLink to="/register">新規登録</NuxtLink>
             </li>
